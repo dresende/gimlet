@@ -1,5 +1,6 @@
 ## Gimlet
 
+[![Build Status](https://api.travis-ci.org/dresende/gimlet.svg?branch=master)](http://travis-ci.org/dresende/gimlet)
 [![](https://badge.fury.io/js/gimlet.svg)](https://npmjs.org/package/gimlet)
 [![](https://gemnasium.com/dresende/gimlet.png)](https://gemnasium.com/dresende/gimlet)
 
