@@ -1,5 +1,8 @@
 ## Gimlet
 
+[![](https://badge.fury.io/js/gimlet.svg)](https://npmjs.org/package/gimlet)
+[![](https://gemnasium.com/dresende/gimlet.png)](https://gemnasium.com/dresende/gimlet)
+
 Gimlet is a NodeJS module for database access built on top of commonly used database drivers. It gives some high level validations and helper methods on top of returned rows. This is not an ORM/ODM, queries must still be made by hand (more or less..).
 
 ### Installation
@@ -29,7 +32,9 @@ If you want to use another package to access the same database type, you can reg
 ```js
 var gimlet = require("gimlet");
 
-gimlet.register("mysql2", "mysql"); // 
+gimlet.register("mysql2", "mysql"); // will use mysql2 package with mysql integration
+
+gimlet.connect("mysql2://...");
 ```
 
 ### Usage
