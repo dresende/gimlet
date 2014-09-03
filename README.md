@@ -69,7 +69,7 @@ Close connection.
 
 #### Record
 
-When calling `connection.query()`, returned rows should be instances of `Record` instead of plain objects. Some validations occur (based on column types) and some helper methods exist.
+When calling `connection.query()`, returned rows should be instances of `Record` instead of plain objects. Records usually are extended with some base plugins (and perhaps external plugins). By default, a `Record` will be extended with `record-base`, `record-changes` and `record-freeze` that will give you the methods below.
 
 ##### save([changes[, cb]])
 
@@ -78,3 +78,11 @@ Save record modifications. You can pass a `changes` object with a few more chang
 ##### remove([cb])
 
 Remove record from database.
+
+##### changes()
+
+Returns an object with the changes detected on the record.
+
+##### changed()
+
+Returns a boolean indicating if the record has been changed or not.
