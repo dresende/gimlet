@@ -9,13 +9,14 @@
 	"homepage"    : "http://github.com/dresende/gimlet",
 	"repository"  : "http://github.com/dresende/gimlet.git",
 	"scripts"     : {
-		"test"        : "node test/run",
-		"test-travis" : "istanbul cover node_modules/mocha/bin/_mocha --report lcovonly -- --reporter spec --check-leaks test/integration/"
+		"test" : "node test/run"
 	},
 	"devDependencies": {
 		"mocha"               : "1.21.4",
 		"glob"                : "4.0.5",
 		"should"              : "4.0.4",
-		"istanbul"            : "0.3.0"
+		"coveralls"           : "2.11.1",
+		"mocha-lcov-reporter" : "0.0.1",
+		"jscover"             : "0.2.4"
 	}
 }

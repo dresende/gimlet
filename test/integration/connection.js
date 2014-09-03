@@ -9,12 +9,25 @@ describe("Connection", function () {
 		con = Gimlet.connect("test://");
 		con.open(done);
 	});
+
 	after(function (done) {
 		con.close(done);
 	});
 
 	it("should have a .query() method to query the low level driver", function (done) {
 		con.should.have.property("query").of.type("function");
+
+		return done();
+	});
+
+	it("should have an .open() method to connect to database", function (done) {
+		con.should.have.property("open").of.type("function");
+
+		return done();
+	});
+
+	it("should have a .close() method to disconnect from database", function (done) {
+		con.should.have.property("close").of.type("function");
 
 		return done();
 	});
@@ -30,16 +43,102 @@ describe("Connection", function () {
 
 		return done();
 	});
+});
 
-	it("should have an .open() method to connect to database", function (done) {
-		con.should.have.property("open").of.type("function");
+describe("Connection.use()", function () {
+	var con = null;
+
+	beforeEach(function (done) {
+		con = Gimlet.connect("test://");
+		con.open(done);
+	});
+
+	afterEach(function (done) {
+		con.close(done);
+	});
+
+	it("can be used to load a module", function (done) {
+		con.use(function ($) {
+			$.on("record", function (e) {
+				e.record.custom_prop = 12345;
+			});
+		});
+
+		con.query("users", function (err, users) {
+			users[0].should.have.property("custom_prop", 12345);
+
+			return done();
+		});
+	});
+
+	it("can be used to load a module after querying", function (done) {
+		// without this, the loaded plugin ahead will not be able to change record
+		con.cease("record-freeze");
+
+		con.query("users", function (err, users) {
+			users[0].should.not.have.property("custom_prop");
+
+			con.use(function ($) {
+				$.on("record", function (e) {
+					e.record.custom_prop = 12345;
+				});
+			});
+
+			con.query("users", function (err, users) {
+				users[0].should.have.property("custom_prop", 12345);
+
+				return done();
+			});
+		});
+	});
+
+	it("can be used to load a base module after querying", function (done) {
+		con.cease("record-freeze");
+
+		con.query("users", function (err, users) {
+			(function () {
+				con.use("record-freeze");
+			}).should.not.throw();
+
+			return done();
+		});
+	});
+
+	it("can be used to move a plugin to the end of the load list", function (done) {
+		// moves record-changes to the end (after record-freeze)
+		con.use("record-changes");
+
+		return done();
+	});
+});
+
+describe("Connection.cease()", function () {
+	var con = null;
+
+	beforeEach(function (done) {
+		con = Gimlet.connect("test://");
+		con.open(done);
+	});
+
+	afterEach(function (done) {
+		con.close(done);
+	});
+
+	it("can be called before any query", function (done) {
+		(function () {
+			con.cease("record-freeze");
+		}).should.not.throw();
 
 		return done();
 	});
 
-	it("should have a .close() method to disconnect from database", function (done) {
-		con.should.have.property("close").of.type("function");
+	it("cannot be called after first query", function (done) {
+		con.query("users", function () {
+			(function () {
+				con.cease("record-freeze");
+			}).should.throw();
 
-		return done();
+			return done();
+		});
 	});
 });

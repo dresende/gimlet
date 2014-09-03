@@ -39,3 +39,29 @@ describe("Gimlet.connect()", function () {
 		return done();
 	});
 });
+
+describe("Gimlet.register()", function () {
+	it("should allow users to symlink drivers", function (done) {
+		Gimlet.register("new-proto", "test");
+
+		(function () {
+			Gimlet.connect("new-proto://"); // same as test
+		}).should.not.throw();
+
+		return done();
+	});
+
+	it("should allow custom drivers", function (done) {
+		Gimlet.register("new-proto", {
+			create: function () {
+				return "new-protocol";
+			}
+		});
+
+		var obj = Gimlet.connect("new-proto://");
+
+		obj.connection.should.eql("new-protocol");
+
+		return done();
+	});
+});
