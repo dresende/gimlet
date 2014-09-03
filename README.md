@@ -1,8 +1,9 @@
 ## Gimlet
 
 [![Build Status](https://api.travis-ci.org/dresende/gimlet.svg?branch=master)](http://travis-ci.org/dresende/gimlet)
-[![](https://badge.fury.io/js/gimlet.svg)](https://npmjs.org/package/gimlet)
-[![](https://gemnasium.com/dresende/gimlet.png)](https://gemnasium.com/dresende/gimlet)
+[![Coverage Status](https://img.shields.io/coveralls/dresende/gimlet.svg)](https://coveralls.io/r/dresende/gimlet?branch=master)
+[![Published Version](https://badge.fury.io/js/gimlet.svg)](https://npmjs.org/package/gimlet)
+[![Dependencies](https://gemnasium.com/dresende/gimlet.png)](https://gemnasium.com/dresende/gimlet)
 
 Gimlet is a NodeJS module for database access built on top of commonly used database drivers. It gives some high level validations and helper methods on top of returned rows. This is not an ORM/ODM, queries must still be made by hand (more or less..).
 
