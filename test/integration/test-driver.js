@@ -32,7 +32,7 @@ describe("Test Driver", function () {
 		});
 
 		con.query("users", function (err, users) {
-			users[0].age = 30;
+			users[0].gender = "unknown";
 			users[0].save(function (err) {
 				should.exist(err);
 
