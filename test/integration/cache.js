@@ -7,7 +7,7 @@ describe("Cache", function () {
 
 	before(function (done) {
 		con   = Gimlet.connect("test://");
-		con.loadExtensions();
+		con.use("cache");
 
 		return done();
 	});
@@ -177,5 +177,35 @@ describe("Cache", function () {
 				});
 			});
 		}, 150);
+	});
+
+	it("should bypass other caches after check", function (done) {
+		var cache = con.cache({}, function (id, next) {
+			setImmediate(function () {
+				return next(id);
+			});
+		});
+
+		cache.get(333, function (id) {
+			id.should.eql(333);
+		});
+
+		setTimeout(function () {
+			cache.get(444, function (id) {
+				id.should.eql(444);
+
+				setImmediate(function () {
+					cache.cached(333).should.be.true;
+
+					return done();
+				});
+			});
+		}, 150);
+	});
+
+	it("should be fully loaded just before querying", function (done) {
+		con.query("users", function () {
+			return done();
+		});
 	});
 });
