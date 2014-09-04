@@ -154,4 +154,28 @@ describe("Cache", function () {
 			});
 		});
 	});
+
+	it("should clean other caches after check", function (done) {
+		var cache = con.cache({ timeout: 0.1/*100ms*/ }, function (id, next) {
+			setImmediate(function () {
+				return next(id);
+			});
+		});
+
+		cache.get(333, function (id) {
+			id.should.eql(333);
+		});
+
+		setTimeout(function () {
+			cache.get(444, function (id) {
+				id.should.eql(444);
+
+				setImmediate(function () {
+					cache.cached(333).should.be.false;
+
+					return done();
+				});
+			});
+		}, 150);
+	});
 });
