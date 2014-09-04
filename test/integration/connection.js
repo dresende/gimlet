@@ -43,6 +43,12 @@ describe("Connection", function () {
 
 		return done();
 	});
+
+	it("should have a .loadExtensions() method to load the current plugins list immediately", function (done) {
+		con.should.have.property("loadExtensions").of.type("function");
+
+		return done();
+	});
 });
 
 describe("Connection.use()", function () {
@@ -140,5 +146,31 @@ describe("Connection.cease()", function () {
 
 			return done();
 		});
+	});
+});
+
+describe("Connection.loadExtensions()", function () {
+	var con = null;
+
+	beforeEach(function (done) {
+		con = Gimlet.connect("test://");
+		con.open(done);
+	});
+
+	afterEach(function (done) {
+		con.close(done);
+	});
+
+	it("should return true on first call", function (done) {
+		con.loadExtensions().should.be.true;
+
+		return done();
+	});
+
+	it("should return false on second call", function (done) {
+		con.loadExtensions().should.be.true;
+		con.loadExtensions().should.be.false;
+
+		return done();
 	});
 });
