@@ -59,7 +59,15 @@ When you use `gimlet.connect()` you get a `Connection` instance.
 
 ##### query(...[, cb])
 
-Query the database, just like you do with the low level driver. High level drivers should intercept the callback and create the Records appropriately.
+Query the database, just like you do with the low level driver. Returned rows should be doped with features.
+
+##### queryRow(...[, cb])
+
+Similar to `query` but returns only the first row of the results.
+
+##### queryOne(...[, cb])
+
+Similar to `query` but returns only the first column of the first row of the results.
 
 ##### open([cb])
 
