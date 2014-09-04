@@ -2,7 +2,7 @@ var should = require("should");
 var common = require("../common");
 var Gimlet = common.gimlet();
 
-describe("Test Connection", function () {
+describe("Test Driver", function () {
 	var con = null;
 
 	before(function (done) {
