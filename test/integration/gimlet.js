@@ -31,6 +31,22 @@ describe("Gimlet.connect()", function () {
 		return done();
 	});
 
+	it("should not throw if not passed a string", function (done) {
+		(function () {
+			Gimlet.connect();
+		}).should.not.throw();
+
+		return done();
+	});
+
+	it("should not throw if passed other thing not a string", function (done) {
+		(function () {
+			Gimlet.connect([1,2,3]);
+		}).should.not.throw();
+
+		return done();
+	});
+
 	it("should accept test protocol and not throw", function (done) {
 		(function () {
 			Gimlet.connect("test://");
