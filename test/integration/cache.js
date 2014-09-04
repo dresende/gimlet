@@ -209,3 +209,29 @@ describe("Cache", function () {
 		});
 	});
 });
+
+describe("Cache", function () {
+	var con   = null;
+
+	before(function (done) {
+		con   = Gimlet.connect("test://");
+
+		return done();
+	});
+
+	after(function (done) {
+		con.close(done);
+	});
+
+	it("can be loaded after extensions are prepared", function (done) {
+		should.not.exist(con.cache);
+
+		con.query("users", function () {
+			con.use("cache");
+
+			con.should.have.property("cache").of.type("function");
+
+			return done();
+		});
+	});
+});
