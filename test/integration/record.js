@@ -35,3 +35,30 @@ describe("Record", function () {
 		return done();
 	});
 });
+
+describe("Record", function () {
+	var Record = common.gimlet_record().Record;
+	var con    = null;
+
+	before(function (done) {
+		con = Gimlet.connect("test://");
+		con.open(done);
+	});
+
+	after(function (done) {
+		con.close(done);
+	});
+
+	it("should not add non properties from data", function (done) {
+		var data   = { id: 123, name: "John" };
+
+		data.hasOwnProperty = function () { return false; };
+
+		var record = new Record(con, data, {});
+
+		record.should.not.have.enumerable("id");
+		record.should.not.have.enumerable("name");
+
+		return done();
+	});
+});

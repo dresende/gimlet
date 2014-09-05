@@ -84,6 +84,22 @@ describe("Record.save()", function () {
 			return done();
 		}, 100);
 	});
+
+	it("should be possible to call directly from connection", function (done) {
+		con.save("users", { name: "Eric" }, { id: 1 });
+		con.query("users", function (err, users) {
+			should.not.exist(err);
+
+			for (var i = 0; i < users.length; i++) {
+				if (users[i].id == 1) {
+					users[i].name.should.eql("Eric");
+					break;
+				}
+			}
+
+			return done();
+		});
+	});
 });
 
 describe("Record.changed()", function () {
