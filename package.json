@@ -1,8 +1,8 @@
 {
 	"name"        : "gimlet",
-	"version"     : "0.0.4",
+	"version"     : "0.0.5",
 	"description" : "NodeJS module for database access built on top of commonly used database drivers",
-	"keywords"    : [ "database", "driver", "mysql" ],
+	"keywords"    : [ "database", "driver", "mysql", "cache" ],
 	"main"        : "lib/Gimlet",
 	"author"      : "Diogo Resende <dresende@thinkdigital.pt>",
 	"license"     : "MIT",
