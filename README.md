@@ -96,3 +96,53 @@ Returns an object with the changes detected on the record.
 ##### changed()
 
 Returns a boolean indicating if the record has been changed or not.
+
+### Extensions
+
+Some extensions are loaded by default, you can create and load others if you need. The syntax is similar to Express and others.
+
+```js
+var Gimlet = require("gimlet");
+var con    = Gimlet.connect("test://");
+
+con.use("cache"); // use built-in cache extension
+con.cease("record-freeze"); // stop using built-in record freezing
+```
+
+#### cache
+
+This is an extension that gives a `Connection` the ability to create simple asynchronous caches.
+
+```js
+var Gimlet = require("gimlet");
+var con    = Gimlet.connect("mysql://username:password@hostname/database");
+
+con.use("cache");
+var userCache = con.cache(function (id, next) {
+    con.queryRow("SELECT * FROM users WHERE id = ?", [ id ], next);
+});
+
+/**
+ * This will not trigger 2 queries, only one. The second will queue
+ * and wait for the first to return (because the `id` requested is
+ * the same).
+ **/
+userCache.get(1, function (err, user) {
+    console.log(err, user);
+});
+userCache.get(1, function (err, user) {
+    console.log(err, user);
+});
+```
+
+#### record-base
+
+This extensions is the one responsible for creating the `Record.save` and `Record.remove` methods.
+
+#### record-changes
+
+This extension is the one responsible for creating the `Record.changes` and `Record.changed` methods.
+
+#### record-freeze
+
+This extension just freezes the object. It just calls `Object.freeze`. This is a special case since, if detected in the extensions list, it will be moved to the end of the load process to avoid freezing objects before all the necessary changes.
