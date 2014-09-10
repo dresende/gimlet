@@ -1,6 +1,6 @@
 {
 	"name"        : "gimlet",
-	"version"     : "0.0.9",
+	"version"     : "0.0.10",
 	"description" : "NodeJS module for database access built on top of commonly used database drivers",
 	"keywords"    : [ "database", "driver", "mysql", "cache" ],
 	"main"        : "lib/Gimlet",
