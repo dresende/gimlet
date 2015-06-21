@@ -69,6 +69,14 @@ Similar to `query` but returns only the first row of the results.
 
 Similar to `query` but returns only the first column of the first row of the results.
 
+##### create(table, data[, cb])
+
+Just a shortcut to an INSERT query. `data` should be an object with the properties and values you want.
+
+##### remove(table, conditions[, cb])
+
+Just a shortcut to a DELETE query. `conditions` should be an object.
+
 ##### open([cb])
 
 Open connection to database. Some drivers do not connect immediately so you need to call this if you want an immediate connection. MySQL for example connects on first query.
