@@ -2,25 +2,25 @@ var should = require("should");
 var common = require("../common");
 var Gimlet = common.gimlet();
 
-describe("Extensions.use", function () {
+describe("Extensions.use", () => {
 	var con   = null;
 
-	beforeEach(function (done) {
+	beforeEach((done) => {
 		con   = Gimlet.connect("test://");
 
 		return done();
 	});
 
-	afterEach(function (done) {
+	afterEach((done) => {
 		con.close(done);
 	});
 
-	it("should load additional function properties", function (done) {
-		var f = function () {};
+	it("should load additional function properties", (done) => {
+		var f = () => {};
 
 		f.prop = 123;
 
-		con.query("users", function () {
+		con.query("users", () => {
 			con.use(f);
 
 			con.should.have.property("prop").of.type("number").eql(123);
@@ -29,25 +29,25 @@ describe("Extensions.use", function () {
 		});
 	});
 
-	it("should be able to unload if not yet prepared", function (done) {
-		(function () {
+	it("should be able to unload if not yet prepared", (done) => {
+		(() => {
 			con.cease("record-base");
 		}).should.not.throw();
 
 		return done();
 	});
 
-	it("should ignore if not found if not yet prepared", function (done) {
-		(function () {
+	it("should ignore if not found if not yet prepared", (done) => {
+		(() => {
 			con.cease("unknown-extension");
 		}).should.not.throw();
 
 		return done();
 	});
 
-	it("should throw if trying to unload after ready", function (done) {
-		con.query("users", function () {
-			(function () {
+	it("should throw if trying to unload after ready", (done) => {
+		con.query("users", () => {
+			(() => {
 				con.cease("unknown-extension");
 			}).should.throw();
 

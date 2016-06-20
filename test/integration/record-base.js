@@ -2,13 +2,13 @@ var should = require("should");
 var common = require("../common");
 var Gimlet = common.gimlet();
 
-describe("Record.remove()", function () {
+describe("Record.remove()", () => {
 	var con    = null;
 	var record = null;
 
-	before(function (done) {
+	before((done) => {
 		con = Gimlet.connect("test://");
-		con.query("users", function (err, users) {
+		con.query("users", (err, users) => {
 			should.not.exist(err);
 
 			record = users[0];
@@ -17,20 +17,20 @@ describe("Record.remove()", function () {
 		});
 	});
 
-	after(function (done) {
+	after((done) => {
 		con.close(done);
 	});
 
-	it("should be a non enumerable method", function (done) {
+	it("should be a non enumerable method", (done) => {
 		record.should.not.have.enumerable("remove");
 		record.remove.should.be.a.Function;
 
 		return done();
 	});
 
-	it("should remove element", function (done) {
-		record.remove(function () {
-			con.query("users", function (err, users) {
+	it("should remove element", (done) => {
+		record.remove(() => {
+			con.query("users", (err, users) => {
 				should.not.exist(err);
 
 				record.id.should.not.eql(users[0].id);
@@ -41,13 +41,13 @@ describe("Record.remove()", function () {
 	});
 });
 
-describe("Record.save()", function () {
+describe("Record.save()", () => {
 	var con    = null;
 	var record = null;
 
-	before(function (done) {
+	before((done) => {
 		con = Gimlet.connect("test://");
-		con.query("users", function (err, users) {
+		con.query("users", (err, users) => {
 			should.not.exist(err);
 
 			record = users[0];
@@ -56,38 +56,38 @@ describe("Record.save()", function () {
 		});
 	});
 
-	after(function (done) {
+	after((done) => {
 		con.close(done);
 	});
 
-	it("should be a non enumerable method", function (done) {
+	it("should be a non enumerable method", (done) => {
 		record.should.not.have.enumerable("save");
 		record.save.should.be.a.Function;
 
 		return done();
 	});
 
-	it("should save element if changes are made", function (done) {
-		record.save({ name: "Jessica" }, function (err) {
+	it("should save element if changes are made", (done) => {
+		record.save({ name: "Jessica" }, (err) => {
 			should.not.exist(err);
 
 			return done();
 		});
 	});
 
-	it("should save element if changes are made even without a callback", function (done) {
+	it("should save element if changes are made even without a callback", (done) => {
 		record.save({ name: "Jessica" });
 
-		setTimeout(function () {
-			record.changed().should.eql(0);
+		setTimeout(() => {
+			record.changed().should.be.false;
 
 			return done();
 		}, 100);
 	});
 
-	it("should be possible to call directly from connection", function (done) {
+	it("should be possible to call directly from connection", (done) => {
 		con.save("users", { name: "Eric" }, { id: 1 });
-		con.query("users", function (err, users) {
+		con.query("users", (err, users) => {
 			should.not.exist(err);
 
 			for (var i = 0; i < users.length; i++) {
@@ -102,13 +102,13 @@ describe("Record.save()", function () {
 	});
 });
 
-describe("Record.changed()", function () {
+describe("Record.changed()", () => {
 	var con    = null;
 	var record = null;
 
-	before(function (done) {
+	before((done) => {
 		con = Gimlet.connect("test://");
-		con.query("users", function (err, users) {
+		con.query("users", (err, users) => {
 			should.not.exist(err);
 
 			record = users[0];
@@ -117,31 +117,31 @@ describe("Record.changed()", function () {
 		});
 	});
 
-	after(function (done) {
+	after((done) => {
 		con.close(done);
 	});
 
-	it("should be a non enumerable method", function (done) {
+	it("should be a non enumerable method", (done) => {
 		record.should.not.have.enumerable("changed");
 		record.changed.should.be.a.Function;
 
 		return done();
 	});
 
-	it("should return false initially", function (done) {
+	it("should return false initially", (done) => {
 		record.changed().should.be.false;
 
 		return done();
 	});
 });
 
-describe("Record.changes()", function () {
+describe("Record.changes()", () => {
 	var con    = null;
 	var record = null;
 
-	beforeEach(function (done) {
+	beforeEach((done) => {
 		con = Gimlet.connect("test://");
-		con.query("users", function (err, users) {
+		con.query("users", (err, users) => {
 			should.not.exist(err);
 
 			record = users[0];
@@ -150,24 +150,24 @@ describe("Record.changes()", function () {
 		});
 	});
 
-	afterEach(function (done) {
+	afterEach((done) => {
 		con.close(done);
 	});
 
-	it("should be a non enumerable method", function (done) {
+	it("should be a non enumerable method", (done) => {
 		record.should.not.have.enumerable("changes");
 		record.changes.should.be.a.Function;
 
 		return done();
 	});
 
-	it("should return an empty object", function (done) {
+	it("should return an empty object", (done) => {
 		record.changes().should.eql({});
 
 		return done();
 	});
 
-	it("should return an object with changes", function (done) {
+	it("should return an object with changes", (done) => {
 		record.name = "Jessica";
 		record.changes().should.eql({ name: "Jessica" });
 
@@ -175,20 +175,21 @@ describe("Record.changes()", function () {
 	});
 });
 
-describe("Record.changes() / Record.changed()", function () {
+describe("Record.changes() / Record.changed()", () => {
 	var con    = null;
 	var record = null;
 
-	beforeEach(function (done) {
+	beforeEach((done) => {
 		con = Gimlet.connect("test://");
-		con.use(function ($) {
-			$.on("record", function (e) {
+		con.use(($) => {
+			$.on("record", (e) => {
 				e.data.changes = "changes";
 				e.data.changed = "changed";
 			});
 		});
+
 		con.use("record-changes");
-		con.query("users", function (err, users) {
+		con.query("users", (err, users) => {
 			should.not.exist(err);
 
 			record = users[0];
@@ -197,11 +198,11 @@ describe("Record.changes() / Record.changed()", function () {
 		});
 	});
 
-	afterEach(function (done) {
+	afterEach((done) => {
 		con.close(done);
 	});
 
-	it("should not overwrite properties if already defined", function (done) {
+	it("should not overwrite properties if already defined", (done) => {
 		should.not.exist(record.changes);
 		should.not.exist(record.changed);
 

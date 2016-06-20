@@ -2,13 +2,13 @@ var should = require("should");
 var common = require("../common");
 var Gimlet = common.gimlet();
 
-describe("Record", function () {
+describe("Record", () => {
 	var con    = null;
 	var record = null;
 
-	beforeEach(function (done) {
+	beforeEach((done) => {
 		con = Gimlet.connect("test://");
-		con.query("users", function (err, users) {
+		con.query("users", (err, users) => {
 			should.not.exist(err);
 
 			record = users[0];
@@ -17,11 +17,11 @@ describe("Record", function () {
 		});
 	});
 
-	afterEach(function (done) {
+	afterEach((done) => {
 		con.close(done);
 	});
 
-	it("should have enumerable properties attached", function (done) {
+	it("should have enumerable properties attached", (done) => {
 		record.should.have.enumerable("id");
 		record.should.have.enumerable("name");
 		record.should.have.enumerable("gender");
@@ -29,30 +29,30 @@ describe("Record", function () {
 		return done();
 	});
 
-	it("should be frozen by default", function (done) {
+	it("should be frozen by default", (done) => {
 		Object.isFrozen(record).should.be.true;
 
 		return done();
 	});
 });
 
-describe("Record", function () {
+describe("Record", () => {
 	var Record = common.gimlet_record().Record;
 	var con    = null;
 
-	before(function (done) {
+	before((done) => {
 		con = Gimlet.connect("test://");
 		con.open(done);
 	});
 
-	after(function (done) {
+	after((done) => {
 		con.close(done);
 	});
 
-	it("should not add non properties from data", function (done) {
+	it("should not add non properties from data", (done) => {
 		var data   = { id: 123, name: "John" };
 
-		data.hasOwnProperty = function () { return false; };
+		data.hasOwnProperty = () => { return false; };
 
 		var record = new Record(con, data, {});
 

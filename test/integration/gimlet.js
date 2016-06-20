@@ -2,53 +2,53 @@ var should = require("should");
 var common = require("../common");
 var Gimlet = common.gimlet();
 
-describe("Gimlet", function () {
-	it("should have a .connect() method to prepare a connection", function (done) {
+describe("Gimlet", () => {
+	it("should have a .connect() method to prepare a connection", (done) => {
 		Gimlet.should.have.property("connect").of.type("function");
 
 		return done();
 	});
 
-	it("should have a .register() method to register drivers", function (done) {
+	it("should have a .register() method to register drivers", (done) => {
 		Gimlet.should.have.property("register").of.type("function");
 
 		return done();
 	});
 
-	it("should have a .Connection object to manually create connections", function (done) {
+	it("should have a .Connection object to manually create connections", (done) => {
 		Gimlet.should.have.property("Connection").of.type("function");
 
 		return done();
 	});
 });
 
-describe("Gimlet.connect()", function () {
-	it("should throw if the protocol is not supported", function (done) {
-		(function () {
+describe("Gimlet.connect()", () => {
+	it("should throw if the protocol is not supported", (done) => {
+		(() => {
 			Gimlet.connect("unknown-proto://");
 		}).should.throw();
 
 		return done();
 	});
 
-	it("should not throw if not passed a string", function (done) {
-		(function () {
+	it("should not throw if not passed a string", (done) => {
+		(() => {
 			Gimlet.connect();
 		}).should.not.throw();
 
 		return done();
 	});
 
-	it("should not throw if passed other thing not a string", function (done) {
-		(function () {
+	it("should not throw if passed other thing not a string", (done) => {
+		(() => {
 			Gimlet.connect([1,2,3]);
 		}).should.not.throw();
 
 		return done();
 	});
 
-	it("should accept test protocol and not throw", function (done) {
-		(function () {
+	it("should accept test protocol and not throw", (done) => {
+		(() => {
 			Gimlet.connect("test://");
 		}).should.not.throw();
 
@@ -56,20 +56,20 @@ describe("Gimlet.connect()", function () {
 	});
 });
 
-describe("Gimlet.register()", function () {
-	it("should allow users to symlink drivers", function (done) {
+describe("Gimlet.register()", () => {
+	it("should allow users to symlink drivers", (done) => {
 		Gimlet.register("new-proto", "test");
 
-		(function () {
+		(() => {
 			Gimlet.connect("new-proto://"); // same as test
 		}).should.not.throw();
 
 		return done();
 	});
 
-	it("should allow custom drivers", function (done) {
+	it("should allow custom drivers", (done) => {
 		Gimlet.register("new-proto", {
-			create: function () {
+			create: () => {
 				return "new-protocol";
 			}
 		});

@@ -2,38 +2,38 @@ var should = require("should");
 var common = require("../common");
 var Gimlet = common.gimlet();
 
-describe("Test Driver", function () {
+describe("Test Driver", () => {
 	var con = null;
 
-	beforeEach(function (done) {
+	beforeEach((done) => {
 		con = Gimlet.connect("test://");
 		con.open(done);
 	});
 
-	afterEach(function (done) {
+	afterEach((done) => {
 		con.close(done);
 	});
 
-	it("should error on invalid table", function (done) {
-		con.query("animals", function (err) {
+	it("should error on invalid table", (done) => {
+		con.query("animals", (err) => {
 			should.exist(err);
 
 			return done();
 		});
 	});
 
-	it("should error if saving to an invalid table", function (done) {
-		con.use(function ($) {
-			$.on("record", function (e) {
+	it("should error if saving to an invalid table", (done) => {
+		con.use(($) => {
+			$.on("record", (e) => {
 				for (var k in e.props) {
 					e.props[k].table = "animals";
 				}
 			});
 		});
 
-		con.query("users", function (err, users) {
+		con.query("users", (err, users) => {
 			users[0].gender = "unknown";
-			users[0].save(function (err) {
+			users[0].save((err) => {
 				should.exist(err);
 
 				return done();
@@ -41,18 +41,18 @@ describe("Test Driver", function () {
 		});
 	});
 
-	it("should error if saving from a table without primary properties", function (done) {
-		con.use(function ($) {
-			$.on("record", function (e) {
+	it("should error if saving from a table without primary properties", (done) => {
+		con.use(($) => {
+			$.on("record", (e) => {
 				for (var k in e.props) {
 					e.props[k].primary = false;
 				}
 			});
 		});
 
-		con.query("users", function (err, users) {
+		con.query("users", (err, users) => {
 			users[0].name = "Josh";
-			users[0].save(function (err) {
+			users[0].save((err) => {
 				should.exist(err);
 
 				return done();
@@ -60,9 +60,9 @@ describe("Test Driver", function () {
 		});
 	});
 
-	it("should throw if saving from an invalid table and not setting callback", function (done) {
-		con.use(function ($) {
-			$.on("record", function (e) {
+	it("should throw if saving from an invalid table and not setting callback", (done) => {
+		con.use(($) => {
+			$.on("record", (e) => {
 				for (var k in e.props) {
 					e.props[k].table = "animals";
 				}
@@ -71,31 +71,31 @@ describe("Test Driver", function () {
 
 		var dom = require("domain").create();
 
-		dom.on("error", function (err) {
+		dom.on("error", (err) => {
 			should.exist(err);
 
 			return done();
 		});
 
-		dom.run(function () {
-			con.query("users", function (err, users) {
+		dom.run(() => {
+			con.query("users", (err, users) => {
 				users[0].name = "Jasper";
 				users[0].save();
 			});
 		});
 	});
 
-	it("should error if removing from an invalid table", function (done) {
-		con.use(function ($) {
-			$.on("record", function (e) {
+	it("should error if removing from an invalid table", (done) => {
+		con.use(($) => {
+			$.on("record", (e) => {
 				for (var k in e.props) {
 					e.props[k].table = "animals";
 				}
 			});
 		});
 
-		con.query("users", function (err, users) {
-			users[0].remove(function (err) {
+		con.query("users", (err, users) => {
+			users[0].remove((err) => {
 				should.exist(err);
 
 				return done();
@@ -103,9 +103,9 @@ describe("Test Driver", function () {
 		});
 	});
 
-	it("should throw if removing from an invalid table and not setting callback", function (done) {
-		con.use(function ($) {
-			$.on("record", function (e) {
+	it("should throw if removing from an invalid table and not setting callback", (done) => {
+		con.use(($) => {
+			$.on("record", (e) => {
 				for (var k in e.props) {
 					e.props[k].table = "animals";
 				}
@@ -114,30 +114,30 @@ describe("Test Driver", function () {
 
 		var dom = require("domain").create();
 
-		dom.on("error", function (err) {
+		dom.on("error", (err) => {
 			should.exist(err);
 
 			return done();
 		});
 
-		dom.run(function () {
-			con.query("users", function (err, users) {
+		dom.run(() => {
+			con.query("users", (err, users) => {
 				users[0].remove();
 			});
 		});
 	});
 
-	it("should error if removing from a table without primary properties", function (done) {
-		con.use(function ($) {
-			$.on("record", function (e) {
+	it("should error if removing from a table without primary properties", (done) => {
+		con.use(($) => {
+			$.on("record", (e) => {
 				for (var k in e.props) {
 					e.props[k].primary = false;
 				}
 			});
 		});
 
-		con.query("users", function (err, users) {
-			users[0].remove(function (err) {
+		con.query("users", (err, users) => {
+			users[0].remove((err) => {
 				should.exist(err);
 
 				return done();
