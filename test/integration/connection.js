@@ -44,6 +44,12 @@ describe("Connection", () => {
 		return done();
 	});
 
+	it("should have a .ping() method to test connection", (done) => {
+		con.should.have.property("ping").of.type("function");
+
+		return done();
+	});
+
 	it("should have a .loadExtensions() method to load the current plugins list immediately", (done) => {
 		con.should.have.property("loadExtensions").of.type("function");
 
@@ -146,6 +152,40 @@ describe("Connection.cease()", () => {
 
 			return done();
 		});
+	});
+});
+
+describe("Connection.ping()", () => {
+	var con = null;
+
+	beforeEach((done) => {
+		con = Gimlet.connect("test://");
+		con.open(done);
+	});
+
+	afterEach((done) => {
+		con.close(done);
+	});
+
+	it("should check connection", (done) => {
+		con.ping(done);
+	});
+});
+
+describe("Connection.create()", () => {
+	var con = null;
+
+	beforeEach((done) => {
+		con = Gimlet.connect("test://");
+		con.open(done);
+	});
+
+	afterEach((done) => {
+		con.close(done);
+	});
+
+	it("should create an INSERT query and execute", (done) => {
+		con.create("users", { name: "John" }, done);
 	});
 });
 
