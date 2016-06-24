@@ -6,14 +6,14 @@ describe("Cache", () => {
 	var con   = null;
 
 	before((done) => {
-		con   = Gimlet.connect("test://");
+		con = Gimlet.connect("test://");
 		con.use("cache");
 
 		return done();
 	});
 
 	after((done) => {
-		con.close(done);
+		con.handler().close(done);
 	});
 
 	it("should be possible get from cache", (done) => {
@@ -204,7 +204,7 @@ describe("Cache", () => {
 	});
 
 	it("should be fully loaded just before querying", (done) => {
-		con.query("users", () => {
+		con.handler().query("users", () => {
 			return done();
 		});
 	});
@@ -220,13 +220,13 @@ describe("Cache", () => {
 	});
 
 	after((done) => {
-		con.close(done);
+		con.handler().close(done);
 	});
 
 	it("can be loaded after extensions are prepared", (done) => {
 		should.not.exist(con.cache);
 
-		con.query("users", () => {
+		con.handler().query("users", () => {
 			con.use("cache");
 
 			con.should.have.property("cache").of.type("function");

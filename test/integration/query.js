@@ -6,12 +6,9 @@ describe("Connection.queryRow", () => {
 	var con = null;
 
 	beforeEach((done) => {
-		con = Gimlet.connect("test://");
-		con.open(done);
-	});
+		con = Gimlet.connect("test://").handler();
 
-	afterEach((done) => {
-		con.close(done);
+		return done();
 	});
 
 	it("should return one element", (done) => {
@@ -57,12 +54,9 @@ describe("Connection.queryOne", () => {
 	var con = null;
 
 	beforeEach((done) => {
-		con = Gimlet.connect("test://");
-		con.open(done);
-	});
+		con = Gimlet.connect("test://").handler();
 
-	afterEach((done) => {
-		con.close(done);
+		return done();
 	});
 
 	it("should return one value", (done) => {

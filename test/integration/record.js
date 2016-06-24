@@ -7,7 +7,8 @@ describe("Record", () => {
 	var record = null;
 
 	beforeEach((done) => {
-		con = Gimlet.connect("test://");
+		con = Gimlet.connect("test://").handler();
+
 		con.query("users", (err, users) => {
 			should.not.exist(err);
 
@@ -15,10 +16,6 @@ describe("Record", () => {
 
 			return done();
 		});
-	});
-
-	afterEach((done) => {
-		con.close(done);
 	});
 
 	it("should have enumerable properties attached", (done) => {
@@ -41,12 +38,9 @@ describe("Record", () => {
 	var con    = null;
 
 	before((done) => {
-		con = Gimlet.connect("test://");
-		con.open(done);
-	});
+		con = Gimlet.connect("test://").handler();
 
-	after((done) => {
-		con.close(done);
+		return done();
 	});
 
 	it("should not add non properties from data", (done) => {

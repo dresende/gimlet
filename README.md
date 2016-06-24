@@ -45,7 +45,7 @@ gimlet.connect("mysql2://...");
 var gimlet = require("gimlet");
 var con    = gimlet.connect("mysql://....");
 
-con.query("SELECT * FROM users", function (err, users) {
+con.handler().query("SELECT * FROM users", function (err, users) {
     // this is where the differences from the driver appear
     console.log(users);
 });
@@ -57,33 +57,37 @@ con.query("SELECT * FROM users", function (err, users) {
 
 When you use `gimlet.connect()` you get a `Connection` instance.
 
-##### query(...[, cb])
+##### handler()
+
+Get a context isolation for possible transactions. This call is synchronous and returns an API to access the database using the connection pool.
+
+###### handler().query(...[, cb])
 
 Query the database, just like you do with the low level driver. Returned rows should be doped with features.
 
-##### queryRow(...[, cb])
+###### handler().queryRow(...[, cb])
 
 Similar to `query` but returns only the first row of the results.
 
-##### queryOne(...[, cb])
+###### handler().queryOne(...[, cb])
 
 Similar to `query` but returns only the first column of the first row of the results.
 
-##### create(table, data[, cb])
+###### handler().create(table, data[, cb])
 
 Just a shortcut to an INSERT query. `data` should be an object with the properties and values you want.
 
-##### remove(table, conditions[, cb])
+###### handler().remove(table, conditions[, cb])
 
 Just a shortcut to a DELETE query. `conditions` should be an object.
+
+###### handler().close([cb])
+
+Close connection.
 
 ##### open([cb])
 
 Open connection to database. Some drivers do not connect immediately so you need to call this if you want an immediate connection. MySQL for example connects on first query.
-
-##### close([cb])
-
-Close connection.
 
 #### Record
 

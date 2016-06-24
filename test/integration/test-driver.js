@@ -4,18 +4,17 @@ var Gimlet = common.gimlet();
 
 describe("Test Driver", () => {
 	var con = null;
+	var db = null;
 
 	beforeEach((done) => {
 		con = Gimlet.connect("test://");
-		con.open(done);
-	});
+		db  = con.handler();
 
-	afterEach((done) => {
-		con.close(done);
+		return done();
 	});
 
 	it("should error on invalid table", (done) => {
-		con.query("animals", (err) => {
+		db.query("animals", (err) => {
 			should.exist(err);
 
 			return done();
@@ -31,7 +30,7 @@ describe("Test Driver", () => {
 			});
 		});
 
-		con.query("users", (err, users) => {
+		db.query("users", (err, users) => {
 			users[0].gender = "unknown";
 			users[0].save((err) => {
 				should.exist(err);
@@ -50,7 +49,7 @@ describe("Test Driver", () => {
 			});
 		});
 
-		con.query("users", (err, users) => {
+		db.query("users", (err, users) => {
 			users[0].name = "Josh";
 			users[0].save((err) => {
 				should.exist(err);
@@ -78,7 +77,7 @@ describe("Test Driver", () => {
 		});
 
 		dom.run(() => {
-			con.query("users", (err, users) => {
+			db.query("users", (err, users) => {
 				users[0].name = "Jasper";
 				users[0].save();
 			});
@@ -94,7 +93,7 @@ describe("Test Driver", () => {
 			});
 		});
 
-		con.query("users", (err, users) => {
+		db.query("users", (err, users) => {
 			users[0].remove((err) => {
 				should.exist(err);
 
@@ -121,7 +120,7 @@ describe("Test Driver", () => {
 		});
 
 		dom.run(() => {
-			con.query("users", (err, users) => {
+			db.query("users", (err, users) => {
 				users[0].remove();
 			});
 		});
@@ -136,7 +135,7 @@ describe("Test Driver", () => {
 			});
 		});
 
-		con.query("users", (err, users) => {
+		db.query("users", (err, users) => {
 			users[0].remove((err) => {
 				should.exist(err);
 

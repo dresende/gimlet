@@ -8,17 +8,13 @@ describe("Property", () => {
 
 	before((done) => {
 		con = Gimlet.connect("test://");
-		con.query("users", (err, users) => {
+		con.handler().query("users", (err, users) => {
 			should.not.exist(err);
 
 			record = users[0];
 
 			return done();
 		});
-	});
-
-	after((done) => {
-		con.close(done);
 	});
 
 	it("should not be possible to pass a text to a number property", (done) => {

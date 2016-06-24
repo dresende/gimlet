@@ -3,16 +3,14 @@ var common = require("../common");
 var Gimlet = common.gimlet();
 
 describe("Extensions.use", () => {
-	var con   = null;
+	var con = null;
+	var db  = null;
 
 	beforeEach((done) => {
-		con   = Gimlet.connect("test://");
+		con = Gimlet.connect("test://");
+		db  = con.handler();
 
 		return done();
-	});
-
-	afterEach((done) => {
-		con.close(done);
 	});
 
 	it("should load additional function properties", (done) => {
@@ -20,7 +18,7 @@ describe("Extensions.use", () => {
 
 		f.prop = 123;
 
-		con.query("users", () => {
+		db.query("users", () => {
 			con.use(f);
 
 			con.should.have.property("prop").of.type("number").eql(123);
@@ -46,7 +44,7 @@ describe("Extensions.use", () => {
 	});
 
 	it("should throw if trying to unload after ready", (done) => {
-		con.query("users", () => {
+		db.query("users", () => {
 			(() => {
 				con.cease("unknown-extension");
 			}).should.throw();

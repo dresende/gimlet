@@ -7,7 +7,8 @@ describe("Record.remove()", () => {
 	var record = null;
 
 	before((done) => {
-		con = Gimlet.connect("test://");
+		con = Gimlet.connect("test://").handler();
+
 		con.query("users", (err, users) => {
 			should.not.exist(err);
 
@@ -15,10 +16,6 @@ describe("Record.remove()", () => {
 
 			return done();
 		});
-	});
-
-	after((done) => {
-		con.close(done);
 	});
 
 	it("should be a non enumerable method", (done) => {
@@ -46,7 +43,8 @@ describe("Record.save()", () => {
 	var record = null;
 
 	before((done) => {
-		con = Gimlet.connect("test://");
+		con = Gimlet.connect("test://").handler();
+
 		con.query("users", (err, users) => {
 			should.not.exist(err);
 
@@ -54,10 +52,6 @@ describe("Record.save()", () => {
 
 			return done();
 		});
-	});
-
-	after((done) => {
-		con.close(done);
 	});
 
 	it("should be a non enumerable method", (done) => {
@@ -107,7 +101,8 @@ describe("Record.changed()", () => {
 	var record = null;
 
 	before((done) => {
-		con = Gimlet.connect("test://");
+		con = Gimlet.connect("test://").handler();
+
 		con.query("users", (err, users) => {
 			should.not.exist(err);
 
@@ -115,10 +110,6 @@ describe("Record.changed()", () => {
 
 			return done();
 		});
-	});
-
-	after((done) => {
-		con.close(done);
 	});
 
 	it("should be a non enumerable method", (done) => {
@@ -140,7 +131,8 @@ describe("Record.changes()", () => {
 	var record = null;
 
 	beforeEach((done) => {
-		con = Gimlet.connect("test://");
+		con = Gimlet.connect("test://").handler();
+
 		con.query("users", (err, users) => {
 			should.not.exist(err);
 
@@ -148,10 +140,6 @@ describe("Record.changes()", () => {
 
 			return done();
 		});
-	});
-
-	afterEach((done) => {
-		con.close(done);
 	});
 
 	it("should be a non enumerable method", (done) => {
@@ -181,6 +169,7 @@ describe("Record.changes() / Record.changed()", () => {
 
 	beforeEach((done) => {
 		con = Gimlet.connect("test://");
+
 		con.use(($) => {
 			$.on("record", (e) => {
 				e.data.changes = "changes";
@@ -189,6 +178,9 @@ describe("Record.changes() / Record.changed()", () => {
 		});
 
 		con.use("record-changes");
+
+		con = con.handler();
+
 		con.query("users", (err, users) => {
 			should.not.exist(err);
 
@@ -196,10 +188,6 @@ describe("Record.changes() / Record.changed()", () => {
 
 			return done();
 		});
-	});
-
-	afterEach((done) => {
-		con.close(done);
 	});
 
 	it("should not overwrite properties if already defined", (done) => {

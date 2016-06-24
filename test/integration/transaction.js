@@ -6,12 +6,9 @@ describe("Connection.transaction", () => {
 	var con = null;
 
 	beforeEach((done) => {
-		con = Gimlet.connect("test://");
-		con.open(done);
-	});
+		con = Gimlet.connect("test://").handler();
 
-	afterEach((done) => {
-		con.close(done);
+		return done();
 	});
 
 	it("should be a function", (done) => {

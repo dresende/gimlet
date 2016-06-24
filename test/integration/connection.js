@@ -4,18 +4,17 @@ var Gimlet = common.gimlet();
 
 describe("Connection", () => {
 	var con = null;
+	var db  = null;
 
 	before((done) => {
 		con = Gimlet.connect("test://");
-		con.open(done);
-	});
+		db  = con.handler();
 
-	after((done) => {
-		con.close(done);
+		return done();
 	});
 
 	it("should have a .query() method to query the low level driver", (done) => {
-		con.should.have.property("query").of.type("function");
+		db.should.have.property("query").of.type("function");
 
 		return done();
 	});
@@ -27,7 +26,7 @@ describe("Connection", () => {
 	});
 
 	it("should have a .close() method to disconnect from database", (done) => {
-		con.should.have.property("close").of.type("function");
+		db.should.have.property("close").of.type("function");
 
 		return done();
 	});
@@ -59,14 +58,13 @@ describe("Connection", () => {
 
 describe("Connection.use()", () => {
 	var con = null;
+	var db  = null;
 
 	beforeEach((done) => {
 		con = Gimlet.connect("test://");
-		con.open(done);
-	});
+		db  = con.handler();
 
-	afterEach((done) => {
-		con.close(done);
+		return done();
 	});
 
 	it("can be used to load a module", (done) => {
@@ -76,7 +74,7 @@ describe("Connection.use()", () => {
 			});
 		});
 
-		con.query("users", (err, users) => {
+		db.query("users", (err, users) => {
 			users[0].should.have.property("custom_prop", 12345);
 
 			return done();
@@ -87,7 +85,7 @@ describe("Connection.use()", () => {
 		// without this, the loaded plugin ahead will not be able to change record
 		con.cease("record-freeze");
 
-		con.query("users", (err, users) => {
+		db.query("users", (err, users) => {
 			users[0].should.not.have.property("custom_prop");
 
 			con.use(($) => {
@@ -96,7 +94,7 @@ describe("Connection.use()", () => {
 				});
 			});
 
-			con.query("users", (err, users) => {
+			db.query("users", (err, users) => {
 				users[0].should.have.property("custom_prop", 12345);
 
 				return done();
@@ -107,7 +105,7 @@ describe("Connection.use()", () => {
 	it("can be used to load a base module after querying", (done) => {
 		con.cease("record-freeze");
 
-		con.query("users", (err, users) => {
+		db.query("users", (err, users) => {
 			(() => {
 				con.use("record-freeze");
 			}).should.not.throw();
@@ -126,14 +124,13 @@ describe("Connection.use()", () => {
 
 describe("Connection.cease()", () => {
 	var con = null;
+	var db  = null;
 
 	beforeEach((done) => {
 		con = Gimlet.connect("test://");
-		con.open(done);
-	});
+		db  = con.handler();
 
-	afterEach((done) => {
-		con.close(done);
+		return done();
 	});
 
 	it("can be called before any query", (done) => {
@@ -145,7 +142,7 @@ describe("Connection.cease()", () => {
 	});
 
 	it("cannot be called after first query", (done) => {
-		con.query("users", () => {
+		db.query("users", () => {
 			(() => {
 				con.cease("record-freeze");
 			}).should.throw();
@@ -160,11 +157,8 @@ describe("Connection.ping()", () => {
 
 	beforeEach((done) => {
 		con = Gimlet.connect("test://");
-		con.open(done);
-	});
 
-	afterEach((done) => {
-		con.close(done);
+		return done();
 	});
 
 	it("should check connection", (done) => {
@@ -172,16 +166,27 @@ describe("Connection.ping()", () => {
 	});
 });
 
-describe("Connection.create()", () => {
+describe("Connection.open()", () => {
 	var con = null;
 
 	beforeEach((done) => {
 		con = Gimlet.connect("test://");
-		con.open(done);
+
+		return done();
 	});
 
-	afterEach((done) => {
-		con.close(done);
+	it("should check connection", (done) => {
+		con.open(done);
+	});
+});
+
+describe("Connection.create()", () => {
+	var con = null;
+
+	beforeEach((done) => {
+		con = Gimlet.connect("test://").handler();
+
+		return done();
 	});
 
 	it("should create an INSERT query and execute", (done) => {
@@ -194,11 +199,8 @@ describe("Connection.loadExtensions()", () => {
 
 	beforeEach((done) => {
 		con = Gimlet.connect("test://");
-		con.open(done);
-	});
 
-	afterEach((done) => {
-		con.close(done);
+		return done();
 	});
 
 	it("should return true on first call", (done) => {
