@@ -1,3 +1,7 @@
+## 1.0.2 - 16 Nov 2018
+
+- mysql: fixes this.query instead of $.query
+
 ## 1.0.1 - 16 Nov 2018
 
 - Avoid deprecation warning in node 10
