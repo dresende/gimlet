@@ -1,10 +1,10 @@
-var should = require("should");
-var common = require("../common");
-var Gimlet = common.gimlet();
+const should = require("should");
+const common = require("../common");
+const Gimlet = common.gimlet();
 
 describe("Record.remove()", () => {
-	var con    = null;
-	var record = null;
+	let con    = null;
+	let record = null;
 
 	before((done) => {
 		con = Gimlet.connect("test://").handler();
@@ -19,7 +19,7 @@ describe("Record.remove()", () => {
 	});
 
 	it("should be a non enumerable method", (done) => {
-		record.should.not.have.enumerable("remove");
+		record.should.not.have.propertyWithDescriptor("remove", { enumerable: true });
 		record.remove.should.be.a.Function;
 
 		return done();
@@ -39,8 +39,8 @@ describe("Record.remove()", () => {
 });
 
 describe("Record.save()", () => {
-	var con    = null;
-	var record = null;
+	let con    = null;
+	let record = null;
 
 	before((done) => {
 		con = Gimlet.connect("test://").handler();
@@ -55,7 +55,7 @@ describe("Record.save()", () => {
 	});
 
 	it("should be a non enumerable method", (done) => {
-		record.should.not.have.enumerable("save");
+		record.should.not.have.propertyWithDescriptor("save", { enumerable: true });
 		record.save.should.be.a.Function;
 
 		return done();
@@ -97,8 +97,8 @@ describe("Record.save()", () => {
 });
 
 describe("Record.changed()", () => {
-	var con    = null;
-	var record = null;
+	let con    = null;
+	let record = null;
 
 	before((done) => {
 		con = Gimlet.connect("test://").handler();
@@ -113,7 +113,7 @@ describe("Record.changed()", () => {
 	});
 
 	it("should be a non enumerable method", (done) => {
-		record.should.not.have.enumerable("changed");
+		record.should.not.have.propertyWithDescriptor("changed", { enumerable: true });
 		record.changed.should.be.a.Function;
 
 		return done();
@@ -127,8 +127,8 @@ describe("Record.changed()", () => {
 });
 
 describe("Record.changes()", () => {
-	var con    = null;
-	var record = null;
+	let con    = null;
+	let record = null;
 
 	beforeEach((done) => {
 		con = Gimlet.connect("test://").handler();
@@ -143,7 +143,7 @@ describe("Record.changes()", () => {
 	});
 
 	it("should be a non enumerable method", (done) => {
-		record.should.not.have.enumerable("changes");
+		record.should.not.have.propertyWithDescriptor("changes", { enumerable: true });
 		record.changes.should.be.a.Function;
 
 		return done();
@@ -164,8 +164,8 @@ describe("Record.changes()", () => {
 });
 
 describe("Record.changes() / Record.changed()", () => {
-	var con    = null;
-	var record = null;
+	let con    = null;
+	let record = null;
 
 	beforeEach((done) => {
 		con = Gimlet.connect("test://");

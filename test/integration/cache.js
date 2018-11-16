@@ -1,9 +1,9 @@
-var should = require("should");
-var common = require("../common");
-var Gimlet = common.gimlet();
+const should = require("should");
+const common = require("../common");
+const Gimlet = common.gimlet();
 
 describe("Cache", () => {
-	var con   = null;
+	let con = null;
 
 	before((done) => {
 		con = Gimlet.connect("test://");
@@ -17,9 +17,9 @@ describe("Cache", () => {
 	});
 
 	it("should be possible get from cache", (done) => {
-		var cache = con.cache((id, next) => {
+		let cache = con.cache((id, next) => {
 			setImmediate(() => {
-				var o = {};
+				let o = {};
 
 				o.id   = id;
 				o.name = "user" + id;
@@ -39,7 +39,7 @@ describe("Cache", () => {
 	});
 
 	it("should return anything the cache resolver returns", (done) => {
-		var cache = con.cache((a, b, next) => {
+		let cache = con.cache((a, b, next) => {
 			setImmediate(() => {
 				return next(new Error("whatever"), 123, b, a);
 			});
@@ -59,7 +59,7 @@ describe("Cache", () => {
 	});
 
 	it("should be able to create with options", (done) => {
-		var cache = con.cache({ timeout: 1 }, (id, next) => {
+		let cache = con.cache({ timeout: 1 }, (id, next) => {
 			setImmediate(() => {
 				return next(id);
 			});
@@ -73,7 +73,7 @@ describe("Cache", () => {
 	});
 
 	it("should be able to create with null options", (done) => {
-		var cache = con.cache(null, (id, next) => {
+		let cache = con.cache(null, (id, next) => {
 			setImmediate(() => {
 				return next(id);
 			});
@@ -87,7 +87,7 @@ describe("Cache", () => {
 	});
 
 	it("should not time out if not enough time as passed", (done) => {
-		var cache = con.cache({ timeout: 1/*1s*/ }, (id, next) => {
+		let cache = con.cache({ timeout: 1/*1s*/ }, (id, next) => {
 			setImmediate(() => {
 				return next(id);
 			});
@@ -109,7 +109,7 @@ describe("Cache", () => {
 	});
 
 	it("should time out if time as passed", (done) => {
-		var cache = con.cache({ timeout: 0.1/*100ms*/ }, (id, next) => {
+		let cache = con.cache({ timeout: 0.1/*100ms*/ }, (id, next) => {
 			setImmediate(() => {
 				return next(id);
 			});
@@ -131,7 +131,7 @@ describe("Cache", () => {
 	});
 
 	it("should queue if calling more than once before cache resolves", (done) => {
-		var cache = con.cache({ timeout: 0.1/*100ms*/ }, (id, next) => {
+		let cache = con.cache({ timeout: 0.1/*100ms*/ }, (id, next) => {
 			setImmediate(() => {
 				return next(id);
 			});
@@ -156,7 +156,7 @@ describe("Cache", () => {
 	});
 
 	it("should clean other caches after check", (done) => {
-		var cache = con.cache({ timeout: 0.1/*100ms*/ }, (id, next) => {
+		let cache = con.cache({ timeout: 0.1/*100ms*/ }, (id, next) => {
 			setImmediate(() => {
 				return next(id);
 			});
@@ -180,7 +180,7 @@ describe("Cache", () => {
 	});
 
 	it("should bypass other caches after check", (done) => {
-		var cache = con.cache({}, (id, next) => {
+		let cache = con.cache({}, (id, next) => {
 			setImmediate(() => {
 				return next(id);
 			});
@@ -211,7 +211,7 @@ describe("Cache", () => {
 });
 
 describe("Cache", () => {
-	var con   = null;
+	let con   = null;
 
 	before((done) => {
 		con   = Gimlet.connect("test://");

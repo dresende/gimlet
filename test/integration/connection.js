@@ -1,10 +1,10 @@
-var should = require("should");
-var common = require("../common");
-var Gimlet = common.gimlet();
+const should = require("should");
+const common = require("../common");
+const Gimlet = common.gimlet();
 
 describe("Connection", () => {
-	var con = null;
-	var db  = null;
+	let con = null;
+	let db  = null;
 
 	before((done) => {
 		con = Gimlet.connect("test://");
@@ -57,8 +57,8 @@ describe("Connection", () => {
 });
 
 describe("Connection.use()", () => {
-	var con = null;
-	var db  = null;
+	let con = null;
+	let db  = null;
 
 	beforeEach((done) => {
 		con = Gimlet.connect("test://");
@@ -123,8 +123,8 @@ describe("Connection.use()", () => {
 });
 
 describe("Connection.cease()", () => {
-	var con = null;
-	var db  = null;
+	let con = null;
+	let db  = null;
 
 	beforeEach((done) => {
 		con = Gimlet.connect("test://");
@@ -153,7 +153,7 @@ describe("Connection.cease()", () => {
 });
 
 describe("Connection.ping()", () => {
-	var con = null;
+	let con = null;
 
 	beforeEach((done) => {
 		con = Gimlet.connect("test://");
@@ -167,7 +167,7 @@ describe("Connection.ping()", () => {
 });
 
 describe("Connection.open()", () => {
-	var con = null;
+	let con = null;
 
 	beforeEach((done) => {
 		con = Gimlet.connect("test://");
@@ -181,7 +181,7 @@ describe("Connection.open()", () => {
 });
 
 describe("Connection.create()", () => {
-	var con = null;
+	let con = null;
 
 	beforeEach((done) => {
 		con = Gimlet.connect("test://").handler();
@@ -195,7 +195,7 @@ describe("Connection.create()", () => {
 });
 
 describe("Connection.loadExtensions()", () => {
-	var con = null;
+	let con = null;
 
 	beforeEach((done) => {
 		con = Gimlet.connect("test://");

@@ -1,10 +1,10 @@
-var should = require("should");
-var common = require("../common");
-var Gimlet = common.gimlet();
+const should = require("should");
+const common = require("../common");
+const Gimlet = common.gimlet();
 
 describe("Property", () => {
-	var con    = null;
-	var record = [];
+	let con    = null;
+	let record = [];
 
 	before((done) => {
 		con = Gimlet.connect("test://");

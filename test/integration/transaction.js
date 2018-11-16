@@ -1,9 +1,9 @@
-var should = require("should");
-var common = require("../common");
-var Gimlet = common.gimlet();
+const should = require("should");
+const common = require("../common");
+const Gimlet = common.gimlet();
 
 describe("Connection.transaction", () => {
-	var con = null;
+	let con = null;
 
 	beforeEach((done) => {
 		con = Gimlet.connect("test://").handler();

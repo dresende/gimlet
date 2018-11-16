@@ -1,6 +1,6 @@
-var should = require("should");
-var common = require("../common");
-var Gimlet = common.gimlet();
+const should = require("should");
+const common = require("../common");
+const Gimlet = common.gimlet();
 
 describe("Gimlet", () => {
 	it("should have a .connect() method to prepare a connection", (done) => {
@@ -70,13 +70,13 @@ describe("Gimlet.register()", () => {
 	it("should allow custom drivers", (done) => {
 		Gimlet.register("new-proto", {
 			create: () => {
-				return "new-protocol";
+				return { proto: "new-protocol" };
 			}
 		});
 
-		var obj = Gimlet.connect("new-proto://");
+		let obj = Gimlet.connect("new-proto://");
 
-		obj.connection.should.eql("new-protocol");
+		obj.connection.proto.should.eql("new-protocol");
 
 		return done();
 	});

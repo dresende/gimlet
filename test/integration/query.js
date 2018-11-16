@@ -1,9 +1,9 @@
-var should = require("should");
-var common = require("../common");
-var Gimlet = common.gimlet();
+const should = require("should");
+const common = require("../common");
+const Gimlet = common.gimlet();
 
 describe("Connection.queryRow", () => {
-	var con = null;
+	let con = null;
 
 	beforeEach((done) => {
 		con = Gimlet.connect("test://").handler();
@@ -30,7 +30,7 @@ describe("Connection.queryRow", () => {
 
 	it("should return null if none found", (done) => {
 		con.query("users", (err, users) => {
-			users.forEach((user) => {
+			users.map((user) => {
 				user.remove();
 			});
 
@@ -51,7 +51,7 @@ describe("Connection.queryRow", () => {
 });
 
 describe("Connection.queryOne", () => {
-	var con = null;
+	let con = null;
 
 	beforeEach((done) => {
 		con = Gimlet.connect("test://").handler();
@@ -78,7 +78,7 @@ describe("Connection.queryOne", () => {
 
 	it("should return null if no rows found", (done) => {
 		con.query("users", (err, users) => {
-			users.forEach((user) => {
+			users.map((user) => {
 				user.remove();
 			});
 

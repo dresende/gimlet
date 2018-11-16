@@ -1,10 +1,10 @@
-var should = require("should");
-var common = require("../common");
-var Gimlet = common.gimlet();
+const should = require("should");
+const common = require("../common");
+const Gimlet = common.gimlet();
 
 describe("Extensions.use", () => {
-	var con = null;
-	var db  = null;
+	let con = null;
+	let db  = null;
 
 	beforeEach((done) => {
 		con = Gimlet.connect("test://");
@@ -14,7 +14,7 @@ describe("Extensions.use", () => {
 	});
 
 	it("should load additional function properties", (done) => {
-		var f = () => {};
+		let f = () => {};
 
 		f.prop = 123;
 

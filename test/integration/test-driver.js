@@ -1,10 +1,10 @@
-var should = require("should");
-var common = require("../common");
-var Gimlet = common.gimlet();
+const should = require("should");
+const common = require("../common");
+const Gimlet = common.gimlet();
 
 describe("Test Driver", () => {
-	var con = null;
-	var db = null;
+	let con = null;
+	let db = null;
 
 	beforeEach((done) => {
 		con = Gimlet.connect("test://");
@@ -24,9 +24,9 @@ describe("Test Driver", () => {
 	it("should error if saving to an invalid table", (done) => {
 		con.use(($) => {
 			$.on("record", (e) => {
-				for (var k in e.props) {
+				Object.keys(e.props).map((k) => {
 					e.props[k].table = "animals";
-				}
+				});
 			});
 		});
 
@@ -43,9 +43,9 @@ describe("Test Driver", () => {
 	it("should error if saving from a table without primary properties", (done) => {
 		con.use(($) => {
 			$.on("record", (e) => {
-				for (var k in e.props) {
+				Object.keys(e.props).map((k) => {
 					e.props[k].primary = false;
-				}
+				});
 			});
 		});
 
@@ -62,9 +62,9 @@ describe("Test Driver", () => {
 	it("should throw if saving from an invalid table and not setting callback", (done) => {
 		con.use(($) => {
 			$.on("record", (e) => {
-				for (var k in e.props) {
+				Object.keys(e.props).map((k) => {
 					e.props[k].table = "animals";
-				}
+				});
 			});
 		});
 
@@ -87,9 +87,9 @@ describe("Test Driver", () => {
 	it("should error if removing from an invalid table", (done) => {
 		con.use(($) => {
 			$.on("record", (e) => {
-				for (var k in e.props) {
+				Object.keys(e.props).map((k) => {
 					e.props[k].table = "animals";
-				}
+				});
 			});
 		});
 
@@ -105,9 +105,9 @@ describe("Test Driver", () => {
 	it("should throw if removing from an invalid table and not setting callback", (done) => {
 		con.use(($) => {
 			$.on("record", (e) => {
-				for (var k in e.props) {
+				Object.keys(e.props).map((k) => {
 					e.props[k].table = "animals";
-				}
+				});
 			});
 		});
 
@@ -129,9 +129,9 @@ describe("Test Driver", () => {
 	it("should error if removing from a table without primary properties", (done) => {
 		con.use(($) => {
 			$.on("record", (e) => {
-				for (var k in e.props) {
+				Object.keys(e.props).map((k) => {
 					e.props[k].primary = false;
-				}
+				});
 			});
 		});
 

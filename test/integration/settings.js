@@ -1,10 +1,10 @@
-var should   = require("should");
-var common   = require("../common");
-var Settings = common.gimlet_settings();
+const should   = require("should");
+const common   = require("../common");
+const Settings = common.gimlet_settings();
 
 describe("Settings", () => {
 	it("should be possible to get default settings", (done) => {
-		var settings = Settings.defaults;
+		let settings = Settings.defaults;
 
 		settings.should.have.property("extensions").of.type("object");
 
@@ -12,7 +12,7 @@ describe("Settings", () => {
 	});
 
 	it("should be possible to not pass any settings and have the defaults", (done) => {
-		var settings = Settings.extend();
+		let settings = Settings.extend();
 
 		settings.should.have.property("extensions").of.type("object");
 
@@ -20,8 +20,8 @@ describe("Settings", () => {
 	});
 
 	it("should be possible extend default settings", (done) => {
-		var settings       = Settings.extend({ set: true });
-		var other_settings = Settings.extend();
+		let settings       = Settings.extend({ set: true });
+		let other_settings = Settings.extend();
 
 		settings.should.have.property("set").of.type("boolean");
 		other_settings.should.not.have.property("set");
@@ -30,7 +30,7 @@ describe("Settings", () => {
 	});
 
 	it("should be possible change default settings", (done) => {
-		var settings = Settings.extend({ extensions: [] });
+		let settings = Settings.extend({ extensions: [] });
 
 		settings.should.have.property("extensions").of.type("object").with.lengthOf(0);
 
