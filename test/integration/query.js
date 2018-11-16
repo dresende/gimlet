@@ -68,6 +68,15 @@ describe("Connection.queryOne", () => {
 		});
 	});
 
+	it("should return null if no value", (done) => {
+		con.queryOne("empty", (err, id) => {
+			should.not.exist(err);
+			should.equal(id, null);
+
+			return done();
+		});
+	});
+
 	it("should return error if any", (done) => {
 		con.queryOne("animals", (err) => {
 			should.exist(err);

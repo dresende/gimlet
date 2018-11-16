@@ -21,6 +21,14 @@ describe("Test Driver", () => {
 		});
 	});
 
+	it("should error creating on invalid table", (done) => {
+		db.create("unknown-animals", {}, (err) => {
+			should.exist(err);
+
+			return done();
+		});
+	});
+
 	it("should error if saving to an invalid table", (done) => {
 		con.use(($) => {
 			$.on("record", (e) => {
@@ -34,6 +42,18 @@ describe("Test Driver", () => {
 			users[0].gender = "unknown";
 			users[0].save((err) => {
 				should.exist(err);
+
+				return done();
+			});
+		});
+	});
+
+	it("should ignore invalid properties", (done) => {
+		db.query("users", (err, users) => {
+			users[0].vat = 12345;
+			users[0].save((err) => {
+				should.not.exist(err);
+				users[0].should.not.have.property("vat");
 
 				return done();
 			});

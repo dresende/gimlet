@@ -197,3 +197,28 @@ describe("Record.changes() / Record.changed()", () => {
 		return done();
 	});
 });
+
+
+describe("printing Record", () => {
+	let con    = null;
+	let record = null;
+
+	beforeEach((done) => {
+		con = Gimlet.connect("test://").handler();
+
+		con.query("users", (err, users) => {
+			should.not.exist(err);
+
+			record = users[0];
+
+			return done();
+		});
+	});
+
+	it("should have a proper inspect() method", (done) => {
+		should.exist(record.inspect);
+		record.inspect().should.be.of.type("string");
+
+		return done();
+	});
+});
