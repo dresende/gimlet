@@ -1,3 +1,8 @@
+## 1.0.3 - 20 Feb 2019
+
+- deps:
+  - mocha@6.0.0
+
 ## 1.0.2 - 16 Nov 2018
 
 - mysql: fixes this.query instead of $.query
