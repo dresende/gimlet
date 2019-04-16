@@ -31,7 +31,7 @@ mysql  | mysql
 If you want to use another package to access the same database type, you can register the package.
 
 ```js
-var gimlet = require("gimlet");
+const gimlet = require("gimlet");
 
 gimlet.register("mysql2", "mysql"); // will use mysql2 package with mysql integration
 
@@ -41,10 +41,10 @@ gimlet.connect("mysql2://...");
 ### Usage
 
 ```js
-var gimlet = require("gimlet");
-var con    = gimlet.connect("mysql://....");
+const gimlet = require("gimlet");
+const db     = gimlet.connect("mysql://....");
 
-con.handler().query("SELECT * FROM users", function (err, users) {
+db.handler().query("SELECT * FROM users", (err, users) => {
     // this is where the differences from the driver appear
     console.log(users);
 });
@@ -108,16 +108,30 @@ Returns an object with the changes detected on the record.
 
 Returns a boolean indicating if the record has been changed or not.
 
+### Special Types
+
+To simplify the use of `POINT` and `POLYGON` database types, there are special classes to help you. Here's an example.
+
+```js
+const Gimlet = require("gimlet");
+const db     = Gimlet.connect("mysql://username:password@hostname/database");
+
+db.handler().query("INSERT INTO locations SET ?", {
+	name     : "Aveiro, Portugal",
+	position : new Gimlet.types.Point(-8.653602, 40.641271),
+})
+```
+
 ### Extensions
 
 Some extensions are loaded by default, you can create and load others if you need. The syntax is similar to Express and others.
 
 ```js
-var Gimlet = require("gimlet");
-var con    = Gimlet.connect("test://");
+const Gimlet = require("gimlet");
+const db     = Gimlet.connect("test://");
 
-con.use("cache"); // use built-in cache extension
-con.cease("record-freeze"); // stop using built-in record freezing
+db.use("cache"); // use built-in cache extension
+db.cease("record-freeze"); // stop using built-in record freezing
 ```
 
 #### cache
@@ -125,12 +139,13 @@ con.cease("record-freeze"); // stop using built-in record freezing
 This is an extension that gives a `Connection` the ability to create simple asynchronous caches.
 
 ```js
-var Gimlet = require("gimlet");
-var con    = Gimlet.connect("mysql://username:password@hostname/database");
+const Gimlet = require("gimlet");
+const db     = Gimlet.connect("mysql://username:password@hostname/database");
 
-con.use("cache");
-var userCache = con.cache(function (id, next) {
-    con.queryRow("SELECT * FROM users WHERE id = ?", [ id ], next);
+db.use("cache");
+
+let userCache = db.cache((id, next) => {
+    db.handler().queryRow("SELECT * FROM users WHERE id = ?", [ id ], next);
 });
 
 /**
@@ -138,10 +153,10 @@ var userCache = con.cache(function (id, next) {
  * and wait for the first to return (because the `id` requested is
  * the same).
  **/
-userCache.get(1, function (err, user) {
+userCache.get(1, (err, user) => {
     console.log(err, user);
 });
-userCache.get(1, function (err, user) {
+userCache.get(1, (err, user) => {
     console.log(err, user);
 });
 ```
