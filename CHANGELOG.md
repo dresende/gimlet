@@ -1,3 +1,8 @@
+## 1.1.1 - 21 Apr 2019
+
+- deps:
+  - mocha@6.1.4
+
 ## 1.1.0 - 16 Apr 2019
 
 - adds types (point and polygon)
