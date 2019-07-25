@@ -1,3 +1,9 @@
+## 1.2.0 - 25 Jul 2019
+
+- adds async/await versions of query*() called fetch*()
+- deps:
+  - mocha@6.2.0
+
 ## 1.1.2 - 09 May 2019
 
 - deps:
