@@ -1,3 +1,7 @@
+## 1.4.0 - 12 Sep 2019
+
+- mysql: fixes looking at objects and not checking if null/undefined
+
 ## 1.3.0 - 12 Sep 2019
 
 - travis:
