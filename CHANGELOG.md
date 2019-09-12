@@ -1,3 +1,10 @@
+## 1.3.0 - 12 Sep 2019
+
+- travis:
+  - removes node 6 and adds node 12
+- deps:
+  - sqlstring@2.3.1
+
 ## 1.2.0 - 25 Jul 2019
 
 - adds async/await versions of query*() called fetch*()
