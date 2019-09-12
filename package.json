@@ -18,6 +18,9 @@
 		"test-cov": "istanbul cover node_modules/mocha/bin/_mocha --report html -- --reporter spec test/integration/",
 		"test-travis": "istanbul cover node_modules/mocha/bin/_mocha --report lcovonly -- --reporter spec --check-leaks test/integration/"
 	},
+	"dependencies": {
+		"sqlstring":"2.3.1"
+	},
 	"devDependencies": {
 		"mocha": "6.2.0",
 		"glob": "7.1.4",
