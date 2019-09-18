@@ -1,3 +1,7 @@
+## 1.5.0 - 18 Sep 2019
+
+- removes sqlstring dependency and exposes a Point class with .toSqlString()
+
 ## 1.4.0 - 12 Sep 2019
 
 - mysql: fixes looking at objects and not checking if null/undefined
