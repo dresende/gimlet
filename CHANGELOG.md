@@ -1,3 +1,12 @@
+## 1.5.1 - 05 Dec 2019
+
+- mysql:
+  - stores last query to give a proper error when pool connection is held for some time
+  - exposes escape and escapeId
+- deps:
+  - glob@7.1.6
+  - mocha@6.2.2
+
 ## 1.5.0 - 18 Sep 2019
 
 - removes sqlstring dependency and exposes a Point class with .toSqlString()
