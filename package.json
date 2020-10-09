@@ -19,7 +19,7 @@
 		"test-travis": "istanbul cover node_modules/mocha/bin/_mocha --report lcovonly -- --reporter spec --check-leaks test/integration/"
 	},
 	"devDependencies": {
-		"mocha": "7.2.0",
+		"mocha": "8.1.3",
 		"glob": "7.1.6",
 		"should": "13.2.3",
 		"istanbul": "0.4.5"
