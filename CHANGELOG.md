@@ -1,3 +1,11 @@
+## 1.6.0 - 09 Oct 2020
+
+- mysql:
+  - changes Point class to have public x/y
+  - changes errors messages from commit/rollback to be able to distinguish them
+- deps:
+  - mocha@8.1.3
+
 ## 1.5.2 - 25 May 2020
 
 - deps:
