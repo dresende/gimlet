@@ -1,3 +1,16 @@
+## 1.6.4 - 13 Jul 2021
+
+- deps:
+  - mocha@9.0.2
+  - glob@7.1.7
+
+## 1.6.3 - 17 Mar 2021
+
+- mysql:
+  - exposes connection()
+- deps:
+  - mocha@8.3.2
+
 ## 1.6.2 - 09 Nov 2020
 
 - deps:
