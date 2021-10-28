@@ -1,3 +1,16 @@
+## 1.7.0 - 28 Oct 2021
+
+- fixes bad whitespace
+- record: fixes throwing on validation when record is not frozen
+
+## 1.6.5 - 13 Jul 2021
+
+- mysql:
+  - nodeadds support for async/await without changing API
+- deps:
+  - mocha@9.1.3
+  - glob@7.2.0
+
 ## 1.6.4 - 13 Jul 2021
 
 - deps:
