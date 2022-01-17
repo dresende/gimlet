@@ -1,3 +1,8 @@
+## 1.7.1 - 17 Jan 2022
+
+- deps:
+  - mocha@9.1.4
+
 ## 1.7.0 - 28 Oct 2021
 
 - fixes bad whitespace
