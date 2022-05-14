@@ -20,7 +20,7 @@
 	},
 	"devDependencies": {
 		"mocha": "9.2.0",
-		"glob": "7.2.0",
+		"glob": "8.0.3",
 		"should": "13.2.3",
 		"istanbul": "0.4.5"
 	}
