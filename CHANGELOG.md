@@ -1,3 +1,11 @@
+## 1.8.0 - 6 Jul 2022
+
+- deps:
+  - mocha@10.0.0
+  - glob@8.0.3
+  - nyc@15.1.0
+  - removes deprecated istanbul@0.4.5
+
 ## 1.7.1 - 17 Jan 2022
 
 - deps:
