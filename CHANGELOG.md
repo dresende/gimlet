@@ -1,3 +1,10 @@
+## 1.8.1 - 7 Jul 2022
+
+- ci:
+  - updates npm shrinkwrap to avoid dev
+  - codeql-analysis: updates to v2
+  - codeql-analysis: removes unnecessary step
+
 ## 1.8.0 - 6 Jul 2022
 
 - deps:
