@@ -1,27 +1,27 @@
 {
-	"name"        : "gimlet",
-	"version"     : "1.8.1",
-	"description" : "NodeJS module for database access built on top of commonly used database drivers",
-	"keywords"    : [
+	"name": "gimlet",
+	"version": "1.8.1",
+	"description": "NodeJS module for database access built on top of commonly used database drivers",
+	"keywords": [
 		"database",
 		"driver",
 		"mysql",
 		"cache"
 	],
-	"main"       : "lib/Gimlet",
-	"author"     : "Diogo Resende <dresende@thinkdigital.pt>",
-	"license"    : "MIT",
-	"homepage"   : "http://github.com/dresende/gimlet",
-	"repository" : "http://github.com/dresende/gimlet.git",
-	"scripts"    : {
-		"test"        : "node test/run",
-		"test-cov"    : "nyc node test/run --report html -- --reporter spec test/integration/",
-		"test-travis" : "nyc node test/run --report lcovonly -- --reporter spec --check-leaks test/integration/"
+	"main": "lib/Gimlet",
+	"author": "Diogo Resende <dresende@thinkdigital.pt>",
+	"license": "MIT",
+	"homepage": "http://github.com/dresende/gimlet",
+	"repository": "http://github.com/dresende/gimlet.git",
+	"scripts": {
+		"test": "node test/run",
+		"test-cov": "nyc node test/run --report html -- --reporter spec test/integration/",
+		"test-travis": "nyc node test/run --report lcovonly -- --reporter spec --check-leaks test/integration/"
 	},
 	"devDependencies": {
-		"mocha"  : "10.0.0",
-		"glob"   : "8.0.3",
-		"should" : "13.2.3",
-		"nyc"    : "15.1.0"
+		"mocha": "10.0.0",
+		"glob": "9.3.1",
+		"should": "13.2.3",
+		"nyc": "15.1.0"
 	}
 }
