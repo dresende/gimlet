@@ -1,6 +1,6 @@
-const should   = require("should");
-const common   = require("../common");
-const Types = common.gimlet_types();
+const should = require("should");
+const common = require("../common");
+const Types  = common.gimlet_types();
 
 describe("Types", () => {
 	describe("Point", () => {
