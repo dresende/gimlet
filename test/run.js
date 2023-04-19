@@ -1,8 +1,8 @@
-var Mocha    = require("mocha");
-var glob     = require("glob");
-var path     = require("path");
-var location = path.normalize(path.join(__dirname, "integration", "*.js"));
-var mocha    = new Mocha({
+const Mocha    = require("mocha");
+const { glob } = require("glob");
+const path     = require("path");
+const location = path.normalize(path.join(__dirname, "integration", "*.js"));
+const mocha    = new Mocha({
 	reporter : "spec"
 });
 
