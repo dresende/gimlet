@@ -1,3 +1,17 @@
+## 1.10.0 - 4 Jul 2023
+
+- mysql:
+  - adds warning when calling query*() with at least 2 trailing functions instead of just 1
+- ci:
+  - adds eslint workflow
+- deps:
+  - [glob@10.3.1](https://www.npmjs.com/package/glob)
+
+## 1.9.0 - 19 Apr 2023
+
+- deps:
+  - [glob@10.2.1](https://www.npmjs.com/package/glob)
+
 ## 1.8.2 - 24 Mar 2023
 
 - deps:
