@@ -1,3 +1,8 @@
+## 1.10.1 - 10 Jul 2023
+
+- deps:
+  - [glob@10.3.3](https://www.npmjs.com/package/glob)
+
 ## 1.10.0 - 4 Jul 2023
 
 - mysql:
