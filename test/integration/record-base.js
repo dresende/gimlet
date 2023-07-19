@@ -85,7 +85,7 @@ describe("Record.save()", () => {
 			should.not.exist(err);
 
 			for (var i = 0; i < users.length; i++) {
-				if (users[i].id == 1) {
+				if (users[i].id === 1) {
 					users[i].name.should.eql("Eric");
 					break;
 				}
