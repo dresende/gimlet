@@ -1,3 +1,10 @@
+## 1.10.2 - 25 Sep 2023
+
+- drivers:
+  - mysql: removes unnecessary code blocks
+- deps:
+  - [glob@10.3.6](https://www.npmjs.com/package/glob)
+
 ## 1.10.1 - 10 Jul 2023
 
 - deps:
