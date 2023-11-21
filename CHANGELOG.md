@@ -1,3 +1,8 @@
+## 1.10.4 - 21 Nov 2023
+
+- connection:
+  - changes driver creation to parse url and pass options
+
 ## 1.10.3 - 21 Nov 2023
 
 - changes connection parsing to use WHATWG URL object instead of url.parse
