@@ -1,3 +1,9 @@
+## 1.10.3 - 21 Nov 2023
+
+- changes connection parsing to use WHATWG URL object instead of url.parse
+- deps:
+  - [glob@10.3.10](https://www.npmjs.com/package/glob)
+
 ## 1.10.2 - 25 Sep 2023
 
 - drivers:
