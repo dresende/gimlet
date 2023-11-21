@@ -1,3 +1,8 @@
+## 1.10.5 - 21 Nov 2023
+
+- connection:
+  - fixes password being encoded and not properly passed to mysql
+
 ## 1.10.4 - 21 Nov 2023
 
 - connection:
