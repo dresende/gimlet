@@ -1,3 +1,8 @@
+## 1.11.0 - 22 Nov 2023
+
+- ci:
+  - rebuilds npm shrinkwrap without wrong dependencies
+
 ## 1.10.5 - 21 Nov 2023
 
 - connection:
