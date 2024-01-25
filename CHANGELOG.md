@@ -1,3 +1,10 @@
+## 1.12.0 - 25 Jan 2024
+
+- connection:
+  - fixes url is not an object before parsing
+- drivers:
+  - mysql: fixes transaction returning a connection instead of API reference
+
 ## 1.11.0 - 22 Nov 2023
 
 - ci:
