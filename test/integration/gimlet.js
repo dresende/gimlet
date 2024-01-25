@@ -31,10 +31,10 @@ describe("Gimlet.connect()", () => {
 		return done();
 	});
 
-	it("should not throw if not passed a string", (done) => {
+	it("should throw if not passed a string", (done) => {
 		(() => {
 			Gimlet.connect();
-		}).should.not.throw();
+		}).should.throw();
 
 		return done();
 	});
