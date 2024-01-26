@@ -1,3 +1,8 @@
+## 1.13.0 - 26 Jan 2024
+
+- drivers:
+  - mysql: fixes transaction rollback not being fully async
+
 ## 1.12.0 - 25 Jan 2024
 
 - connection:
