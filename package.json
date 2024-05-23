@@ -20,7 +20,7 @@
 	},
 	"devDependencies": {
 		"mocha": "10.2.0",
-		"glob": "10.3.10",
+		"glob": "10.3.16",
 		"should": "13.2.3",
 		"nyc": "15.1.0"
 	}
