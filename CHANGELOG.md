@@ -1,3 +1,12 @@
+## 1.14.0 - 4 Jun 2024
+
+- connection:
+  - avoids passing a gimlet option to mysql lib
+  - fixes passing url searchParams methods to mysql lib constructor
+- deps:
+  - mocha@10.4.0
+  - glob@10.4.1
+
 ## 1.13.0 - 26 Jan 2024
 
 - drivers:
