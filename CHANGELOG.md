@@ -1,3 +1,8 @@
+## 1.17.0 - 5 Jun 2024
+
+- record:
+  - fixes numbers coming as decimal strings
+
 ## 1.16.0 - 5 Jun 2024
 
 - record:
