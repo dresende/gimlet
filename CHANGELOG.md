@@ -1,3 +1,8 @@
+## 1.16.0 - 5 Jun 2024
+
+- record:
+  - improves json parsing
+
 ## 1.15.0 - 5 Jun 2024
 
 - record:
