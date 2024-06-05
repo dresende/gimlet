@@ -1,3 +1,8 @@
+## 1.15.0 - 5 Jun 2024
+
+- record:
+  - adds automatic JSON parsing if not done
+
 ## 1.14.0 - 4 Jun 2024
 
 - connection:
