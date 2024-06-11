@@ -1,3 +1,8 @@
+## 1.18.0 - 5 Jun 2024
+
+- record:
+  - improves "JSON detection"
+
 ## 1.17.0 - 5 Jun 2024
 
 - record:
