@@ -19,7 +19,7 @@
 		"test-travis": "nyc node test/run --report lcovonly -- --reporter spec --check-leaks test/integration/"
 	},
 	"devDependencies": {
-		"mocha": "10.4.0",
+		"mocha": "10.5.1",
 		"glob": "10.4.1",
 		"should": "13.2.3",
 		"nyc": "15.1.0"
