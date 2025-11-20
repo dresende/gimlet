@@ -1,3 +1,13 @@
+## 2.0.0 - 20 Nov 2025
+
+- mysql:
+  - fixes releaseTimeout warning not showing if not in debug
+  - minor tweak in query()
+- deps:
+  - [glob@13.0.0](https://www.npmjs.com/package/glob)
+  - [mocha@11.7.5](https://www.npmjs.com/package/mocha)
+  - [nyc@17.1.0](https://www.npmjs.com/package/nyc)
+
 ## 1.18.0 - 5 Jun 2024
 
 - record:
