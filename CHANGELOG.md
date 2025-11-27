@@ -1,3 +1,9 @@
+## 2.1.0 - 27 Nov 2025
+
+- mysql:
+  - fixes maximum stack loop in edge cases when releasing connection
+  - use async version ot driver getConnection() when possible
+
 ## 2.0.0 - 20 Nov 2025
 
 - mysql:
