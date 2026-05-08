@@ -1,3 +1,14 @@
+## 2.2.0 - 8 May 2026
+
+- mysql:
+  - fixes commit/rollback using next instead of error callback
+  - fixes connection hold log message showing seconds instead of millis
+- ci:
+  - adds node 22
+- deps:
+  - [glob@13.0.6](https://www.npmjs.com/package/glob)
+  - [nyc@18.0.0](https://www.npmjs.com/package/nyc)
+
 ## 2.1.0 - 27 Nov 2025
 
 - mysql:
